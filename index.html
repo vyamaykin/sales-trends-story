@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>When stores sell most</title>
-<script>try { var s = localStorage.getItem("story-theme"); if (s) document.documentElement.dataset.theme = s; } catch (e) {}</script>
+<script>document.documentElement.dataset.theme = "light"; try { var s = localStorage.getItem("story-theme"); if (s) document.documentElement.dataset.theme = s; } catch (e) {}</script>
 <style>
 :root{--bg:#f7f6f2;--card:#ffffff;--ink:#1d1d1b;--ink2:#44433f;--ink3:#4a4945;--line:rgba(0,0,0,.10);--line2:rgba(0,0,0,.18);--chip:#eef3fb;--grid:#e3e2dc;
 --blue:#2a78d6;--orange:#eb6834;--aqua:#1baf7a;--gray:#c9c7bf;--heat0:#f0efec;--heat1:#8db6ec}
@@ -13,44 +13,44 @@
 :root[data-theme="dark"]{--bg:#161615;--card:#1f1f1d;--ink:#efeee9;--ink2:#c3c2b8;--ink3:#b9b8ae;--line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.2);--chip:#1e2b3c;--grid:#2e2e2b;
 --blue:#3987e5;--orange:#d95926;--aqua:#199e70;--gray:#4a4a46;--heat0:#2a2a28;--heat1:#22497f}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
 header{padding:64px 0 24px}
-h1{font-size:34px;line-height:1.15;font-weight:650;margin:0 0 10px}
-h2{font-size:22px;font-weight:650;margin:0 0 8px}
+h1{font-size:40px;line-height:1.15;font-weight:700;margin:0 0 12px}
+h2{font-size:26px;line-height:1.25;font-weight:700;margin:0 0 10px}
 .top{display:flex;justify-content:flex-end;margin-bottom:12px}
 #theme{width:auto;padding:6px 14px}
-.lede{font-size:18px;color:var(--ink2);max-width:680px;margin:0}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:28px 0 8px}
+.lede{font-size:21px;color:var(--ink2);max-width:720px;margin:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:28px 0 8px}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.kpi .l{font-size:13px;color:var(--ink2)}.kpi .v{font-size:28px;font-weight:650;font-variant-numeric:tabular-nums}.kpi .s{font-size:12px;color:var(--ink3)}
-.scrolly{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;position:relative}
+.kpi .l{font-size:15px;color:var(--ink2)}.kpi .v{font-size:32px;font-weight:700;font-variant-numeric:tabular-nums}.kpi .s{font-size:14px;color:var(--ink3)}
+.scrolly{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;position:relative}
 .steps{padding:10vh 0 30vh;min-width:0}
 .step{min-height:70vh;display:flex;align-items:center;min-width:0;position:relative}
 .step + .step::before{content:"";position:absolute;top:0;left:0;right:0;border-top:1px solid var(--line2)}
-.step .box{width:100%;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:border-color .25s}
+.step .box{width:100%;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px 26px;transition:border-color .25s}
 .step.active .box{border-color:var(--blue)}
-.stepno{font-size:12px;color:var(--ink3);margin-bottom:2px;font-variant-numeric:tabular-nums}
-.step p{margin:6px 0}
+.stepno{font-size:14px;color:var(--ink3);margin-bottom:2px;font-variant-numeric:tabular-nums}
+.step p{margin:10px 0}
 .graphic{position:sticky;top:8vh;height:84vh;display:flex;flex-direction:column;justify-content:center}
 .graphic .frame{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-.gtitle{font-weight:650;font-size:15px;margin:0 0 2px}.gsub{font-size:13px;color:var(--ink2);margin:0 0 8px}
+.gtitle{font-weight:700;font-size:18px;margin:0 0 4px}.gsub{font-size:15px;color:var(--ink2);margin:0 0 10px}
 .chart{position:relative;height:52vh;min-height:280px}
 #heat{display:none;overflow-x:auto}
-#heat table{border-collapse:separate;border-spacing:3px;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+#heat table{border-collapse:separate;border-spacing:3px;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
 #heat th{font-weight:600;color:var(--ink2);text-align:center;padding:2px 4px}
 #heat th.r{text-align:left;white-space:normal;line-height:1.25}
-#heat td{text-align:center;padding:6px 2px;border-radius:4px}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin-top:8px}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
-details{border:1px solid var(--line);border-radius:10px;margin:10px 0 0;background:var(--card)}
-summary{cursor:pointer;padding:7px 12px;font-weight:600;font-size:13px;list-style:none;display:flex;justify-content:space-between}
+#heat td{text-align:center;padding:8px 2px;border-radius:4px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--ink2);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+details{border:1px solid var(--line);border-radius:10px;margin:14px 0 0;background:var(--card)}
+summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"Hide";font-weight:400;color:var(--ink3)}
 details:not([open]) summary::after{content:"Show"}
-.tw{padding:0 6px 8px}
-table.d{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
-table.d th,table.d td{padding:4px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:normal;vertical-align:top}
+.tw{padding:0 8px 10px}
+table.d{border-collapse:collapse;width:100%;font-size:16px;line-height:1.45;font-variant-numeric:tabular-nums}
+table.d th,table.d td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:normal;vertical-align:top}
 table.d th{vertical-align:bottom}
 table.d th button.sort{all:unset;cursor:pointer;font:inherit;color:inherit;font-weight:600;border-radius:4px}
 table.d th button.sort:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
@@ -61,44 +61,77 @@ table.d th.n,table.d td.n{text-align:right;white-space:nowrap}
 /* A table too wide for its box turns into one small card per row: "label ... value". Set by fitTables(). */
 table.d.stack,table.d.stack tbody,table.d.stack tr,table.d.stack td{display:block;width:100%}
 table.d.stack tr:first-child{display:flex;flex-wrap:wrap;gap:4px 14px;padding:4px 4px 8px}
-table.d.stack th{border:0;padding:0;font-size:12px;text-align:left}
+table.d.stack th{border:0;padding:0;font-size:14px;text-align:left}
 table.d.stack th::before{content:none}
-table.d.stack tr{border-bottom:1px solid var(--line2);padding:6px 0}
-table.d.stack td{border:0;display:flex;justify-content:space-between;gap:12px;padding:2px 4px;white-space:normal;text-align:right}
+table.d.stack tr{border-bottom:1px solid var(--line2);padding:10px 0}
+table.d.stack td{border:0;display:flex;justify-content:space-between;gap:12px;padding:4px 4px;white-space:normal;text-align:right}
 table.d.stack td::before{content:attr(data-label);color:var(--ink2);text-align:left;flex:0 0 auto;max-width:55%}
 table.d.stack td:first-child{font-weight:650;text-align:left}
 table.d.stack td:first-child::before{content:none}
 table.d th{color:var(--ink2);font-weight:600}
 
 table.d tr.hi td{background:var(--chip);font-weight:600}
-table.d .sub{font-size:11px;font-weight:400;color:var(--ink3)}
+table.d .sub{font-size:14px;font-weight:400;color:var(--ink3)}
 section.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:24px 0}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end;margin:10px 0}
-.filters label{display:block;font-size:12px;color:var(--ink2);margin-bottom:3px}
-select,input[type=date],button{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line2);border-radius:8px;padding:6px 8px;height:36px}
+.filters label{display:block;font-size:15px;color:var(--ink2);margin-bottom:3px}
+select,input[type=date],button{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line2);border-radius:8px;padding:8px 10px;height:44px}
 button{cursor:pointer}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
 .two > div{min-width:0}
-.two .chart{height:280px;min-height:0}
-.note{font-size:13px;color:var(--ink3)}
+.two .chart{height:320px;min-height:0}
+.note{font-size:16px;color:var(--ink3)}
+.note.src{overflow-wrap:anywhere;max-width:900px}
 .big{font-weight:650}
-footer{padding:24px 0 64px;color:var(--ink3);font-size:13px;overflow-wrap:anywhere}
+footer{padding:24px 0 64px;color:var(--ink3);font-size:15px;overflow-wrap:anywhere}
 body{overflow-x:clip}
+.fab{position:fixed;z-index:30;width:auto;height:auto;padding:10px 16px;border-radius:999px;background:var(--card);color:var(--ink);
+  border:1px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);font-size:16px;font-weight:600}
+#menuBtn{top:14px;left:14px}
+.step,#explore,#top{scroll-margin-top:16px}
+#toTop{right:18px;bottom:18px}
+#menu{position:fixed;z-index:40;top:0;left:0;bottom:0;width:min(300px,85vw);background:var(--card);border-right:1px solid var(--line2);
+  padding:16px 14px;overflow-y:auto;transform:translateX(-105%);transition:transform .25s;box-shadow:2px 0 18px rgba(0,0,0,.15)}
+#menu.open{transform:none}
+.mhead{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:8px}
+#menuClose{width:40px;height:40px;padding:0;font-size:24px;line-height:1}
+#menuList{list-style:none;margin:0;padding:0;counter-reset:m}
+#menuList a{display:block;padding:8px 10px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:16px;line-height:1.35}
+#menuList a:hover{background:var(--chip)}
+#menuList a[aria-current="true"]{background:var(--chip);font-weight:700;box-shadow:inset 3px 0 0 var(--blue)}
+#menuList .num{display:inline-block;min-width:1.8em;color:var(--ink3);font-variant-numeric:tabular-nums}
+#scrim{position:fixed;inset:0;z-index:35;background:rgba(0,0,0,.35)}
+.fab:focus-visible,#menuList a:focus-visible,#menuClose:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:8px;z-index:50;background:var(--card);color:var(--ink);padding:8px 12px;border-radius:8px}
+.skip:focus{left:120px}
+header{padding-top:72px}
+/* Very wide screens: room for the menu to stay open beside the page. */
+@media (min-width:1700px){#menu{transform:none;box-shadow:none;width:250px}#menuBtn,#menuClose{display:none}#scrim{display:none !important}}
+@media (prefers-reduced-motion:reduce){#menu{transition:none}}
 @media (max-width:900px){.scrolly{grid-template-columns:1fr}.graphic{display:none}.step{min-height:0;padding:12px 0}.steps{padding:0 0 8vh}
-.step .box{opacity:1}.step .box .frame{border:0;padding:12px 0 0;margin-top:8px;border-top:1px solid var(--line);border-radius:0}.chart{height:300px;min-height:0}h1{font-size:28px}}
-@media (max-width:520px){header{padding:32px 0 16px}h1{font-size:24px}h2{font-size:19px}.lede{font-size:16px}
-.step .box{padding:14px 12px}section.card{padding:14px 12px}.kpi .v{font-size:22px}
-#heat table{font-size:11px;border-spacing:2px}#heat td{padding:5px 0}.tw{padding:0 2px 6px}}
+.step .box{opacity:1}.step .box .frame{border:0;padding:12px 0 0;margin-top:8px;border-top:1px solid var(--line);border-radius:0}.chart{height:320px;min-height:0}h1{font-size:32px}}
+@media (max-width:520px){header{padding:32px 0 16px}h1{font-size:28px}h2{font-size:22px}.lede{font-size:18px}body{font-size:17px}table.d{font-size:15px}
+.step .box{padding:18px 14px}section.card{padding:16px 14px}.kpi .v{font-size:24px}.kpis{grid-template-columns:1fr 1fr;gap:10px}.kpi{padding:12px}
+#heat table{font-size:13px;border-spacing:2px}#heat td{padding:7px 0}.tw{padding:0 2px 6px}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#explore">Skip to Explore</a>
+<button id="menuBtn" class="fab" type="button" aria-expanded="false" aria-controls="menu">&#9776; Menu</button>
+<nav id="menu" aria-label="Page sections">
+  <div class="mhead"><span>On this page</span><button id="menuClose" type="button" aria-label="Close menu">&times;</button></div>
+  <ol id="menuList"></ol>
+</nav>
+<div id="scrim" hidden></div>
+<button id="toTop" class="fab" type="button" aria-label="Back to top" hidden>&#8593; Top</button>
+<div class="wrap" id="top">
 <header>
   <div class="top"><button id="theme" type="button" aria-pressed="false">Dark mode</button></div>
   <h1>When do our stores sell the most?</h1>
   <p class="lede" id="lede"></p>
   <div class="kpis" id="kpis"></div>
   <p class="note">Tip: click any table heading to sort by that column. These are sales dollars, not profit. Days the stores were closed (like Thanksgiving) are left out.</p>
+  <p class="note src"><b>Where the numbers come from.</b> My MERS Goodwill, Totals: all stores in Databricks (gold.retail.agg_consolidated_store_sales_summary), with donation count from gold.retail.total_fact_sales. Weekday, month and store patterns: the 65 active stores. Store details from gold.retail.dim_location_full (active stores only). Month patterns use stores open for all of 2024 or 2025. Generated 2026-11-12.</p>
 </header>
 
 <div class="scrolly">
@@ -301,7 +334,7 @@ $("t-forecast").innerHTML = "The 2027 plan uses these same patterns. For each st
 let chart = null;
 const gray = () => css("--gray"), blue = () => css("--blue"), orange = () => css("--orange"), aqua = () => css("--aqua");
 function base(yTitle, extra) {
-  Chart.defaults.color = css("--ink2"); Chart.defaults.borderColor = css("--grid");
+  Chart.defaults.color = css("--ink2"); Chart.defaults.borderColor = css("--grid"); Chart.defaults.font.size = 14;
   return Object.assign({responsive: true, maintainAspectRatio: false, animation: {duration: 400}, plugins: {legend: {display: false}},
     scales: {x: {grid: {display: false}}, y: {title: {display: !!yTitle, text: yTitle}, grid: {color: css("--grid")}}}}, extra || {});
 }
@@ -352,6 +385,29 @@ const STEPS = {
     "Last 12 months vs the 2027 plan", "Our " + codes.length + " open stores")
 };
 document.querySelectorAll(".step .box").forEach((b, i, all) => b.insertAdjacentHTML("afterbegin", '<div class="stepno">' + (i + 1) + ' of ' + all.length + '</div>'));
+/* ---------- menu sidebar + back to top ---------- */
+const smooth = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+const steps = [...document.querySelectorAll(".step")];
+steps.forEach(s => s.id = "step-" + s.dataset.step);
+$("menuList").innerHTML = '<li><a href="#top" data-step="">Summary</a></li>' +
+  steps.map((s, i) => '<li><a href="#' + s.id + '" data-step="' + s.dataset.step + '"><span class="num">' + (i + 1) + '.</span>' + s.querySelector("h2").textContent + '</a></li>').join("") +
+  '<li><a href="#explore" data-step="explore">Explore any store</a></li>';
+const wideMenu = matchMedia("(min-width: 1700px)");
+function openMenu() { $("menu").classList.add("open"); $("scrim").hidden = false; $("menuBtn").setAttribute("aria-expanded", "true"); $("menuList").querySelector("a").focus(); }
+function closeMenu(back) { $("menu").classList.remove("open"); $("scrim").hidden = true; $("menuBtn").setAttribute("aria-expanded", "false"); if (back) $("menuBtn").focus(); }
+$("menuBtn").addEventListener("click", openMenu);
+$("menuClose").addEventListener("click", () => closeMenu(true));
+$("scrim").addEventListener("click", () => closeMenu(true));
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("menu").classList.contains("open")) closeMenu(true); });
+$("menuList").addEventListener("click", e => { const a = e.target.closest("a"); if (!a) return; e.preventDefault();
+  const el = document.querySelector(a.getAttribute("href"));
+  el.scrollIntoView({behavior: smooth, block: "start"});
+  if (!wideMenu.matches) closeMenu(false); });
+$("toTop").addEventListener("click", () => { window.scrollTo({top: 0, behavior: smooth}); $("menuBtn").focus(); });
+addEventListener("scroll", () => { $("toTop").hidden = scrollY < 600;
+  const ex = $("explore").getBoundingClientRect().top < innerHeight * 0.5;
+  if (ex) document.querySelectorAll("#menuList a").forEach(a => a.setAttribute("aria-current", String(a.dataset.step === "explore")));
+  else if (scrollY < 200) document.querySelectorAll("#menuList a").forEach(a => a.setAttribute("aria-current", String(a.dataset.step === ""))); }, {passive: true});
 let current = null;
 /* Wide screens: the chart sits in its own column and stays on screen while the text scrolls past.
    Narrow screens: there is no room beside the text, so the chart moves INTO the active step's box,
@@ -363,6 +419,7 @@ function placeFrame(step) {
 }
 function activate(step, force) {
   document.querySelectorAll(".step").forEach(s => s.classList.toggle("active", s === step));
+  document.querySelectorAll("#menuList a").forEach(a => a.setAttribute("aria-current", String(a.dataset.step === step.dataset.step)));
   const k = step.dataset.step;
   if (k !== current || force) { current = k; placeFrame(step); STEPS[k](); }
 }
